@@ -28,14 +28,14 @@ def xml_to_csv(path):
     """
     classes_names = []
     xml_list = []
-	
-	for xml_file in glob.glob(path + "/*.xml"):
+
+    for xml_file in glob.glob(path + "/*.xml"):
         tree = ET.parse(xml_file)
         root = tree.getroot()
         for member in root.findall("object"):
             classes_names.append(member[0].text)
-            
-	dictionary = dict(zip(classes_names, [i for i in range(len(classes_names))]))
+
+    dictionary = dict(zip(classes_names, [i for i in range(len(classes_names))]))
     for xml_file in glob.glob(path + "/*.xml"):
         tree = ET.parse(xml_file)
         root = tree.getroot()
