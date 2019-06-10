@@ -33,10 +33,10 @@ def xml_to_csv(xml_dir, output_file):
         root = tree.getroot()
         for member in root.findall('object'):
             value = (root.find('filename').text,
-                     int(member[5][0].text), 
-                     int(member[5][2].text),
-                     int(member[5][1].text), 
-                     int(member[5][3].text),
+                     int(member[4][0].text), 
+                     int(member[4][2].text),
+                     int(member[4][1].text), 
+                     int(member[4][3].text),
                      dictionary[member[0].text],
                      int(root.find('size')[0].text),
                      int(root.find('size')[1].text))
