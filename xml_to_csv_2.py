@@ -20,7 +20,7 @@ def _get_classes(xml_dir):
     
 def __list_to_csv(annotations, output_file):
     column_name = ['image_name', 'xmin', 'ymin', 'xmax', 'ymax', 'class_id']
-    xml_df = pd.DataFrame(annotations, columns=column_name)
+    xml_df = pd.DataFrame(annotations)
     xml_df.to_csv(output_file, index=None)
 
 
