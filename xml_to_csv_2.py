@@ -19,7 +19,7 @@ def _get_classes(xml_dir):
     return dict(zip(labels, [i for i in range(len(labels))]))
     
 def __list_to_csv(annotations, output_file):
-    column_name = ['image_name', 'xmin', 'ymin', 'xmax', 'ymax', 'class_id', 'width', 'height']
+    column_name = ['image_name', 'xmin', 'ymin', 'xmax', 'ymax', 'class_id']
     xml_df = pd.DataFrame(annotations, columns=column_name)
     xml_df.to_csv(output_file, index=None)
 
@@ -32,14 +32,12 @@ def xml_to_csv(xml_dir, output_file):
         tree = ET.parse(xml_file)
         root = tree.getroot()
         for member in root.findall('object'):
-            value = (root.find('filename').text,
+            value = ('/content/score_detection/Det_Dataset/train/images/' + root.find('filename').text,
                      int(member[4][0].text), 
-                     int(member[4][2].text),
-                     int(member[4][1].text), 
+                     int(member[4][1].text),
+                     int(member[4][2].text), 
                      int(member[4][3].text),
-                     dictionary[member[0].text],
-                     int(root.find('size')[0].text),
-                     int(root.find('size')[1].text))
+                     member[0].text)
             annotations.append(value)
 
     __list_to_csv(annotations, output_file)
