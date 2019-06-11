@@ -37,6 +37,7 @@ from ..utils.transform import random_transform_generator
 from ..utils.visualization import draw_annotations, draw_boxes
 from ..utils.anchors import anchors_for_shape, compute_gt_annotations
 from ..utils.config import read_config_file, parse_anchor_parameters
+import matplotlib.pyplot as plt
 
 
 def create_generator(args):
@@ -200,10 +201,10 @@ def run(generator, args, anchor_params):
                 # draw regressed anchors in green to override most red annotations
                 # result is that annotations without anchors are red, with anchors are green
                 draw_boxes(image, annotations['bboxes'][max_indices[positive_indices], :], (0, 255, 0))
-
-        cv2.imshow('Image', image)
-        if cv2.waitKey() == ord('q'):
-            return False
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        plt.imshow(image)
+        #if cv2.waitKey() == ord('q'):
+            #return False
     return True
 
 
@@ -229,7 +230,7 @@ def main(args=None):
         anchor_params = parse_anchor_parameters(args.config)
 
     # create the display window
-    cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
+    #cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
 
     if args.loop:
         while run(generator, args, anchor_params=anchor_params):
