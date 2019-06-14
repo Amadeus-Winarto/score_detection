@@ -198,6 +198,10 @@ def run(generator, args, anchor_params):
                 draw_boxes(image, annotations['bboxes'][max_indices[positive_indices], :], (0, 255, 0))
 
         plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        path = '/content/savedimgs'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        cv2.imwrite(os.path.join(path, str(i) + '.jpg'), image)
         #if cv2.waitKey() == ord('q'):
             #return False
     return True
