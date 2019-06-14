@@ -198,8 +198,8 @@ def run(generator, args, anchor_params):
                 draw_boxes(image, annotations['bboxes'][max_indices[positive_indices], :], (0, 255, 0))
 
         plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-        if cv2.waitKey() == ord('q'):
-            return False
+        #if cv2.waitKey() == ord('q'):
+            #return False
     return True
 
 
@@ -225,13 +225,9 @@ def main(args=None):
         anchor_params = parse_anchor_parameters(args.config)
 
     # create the display window
-    cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
+    #cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
 
-    if args.loop:
-        while run(generator, args, anchor_params=anchor_params):
-            pass
-    else:
-        run(generator, args, anchor_params=anchor_params)
+    run(generator, args, anchor_params=anchor_params)
 
 
 if __name__ == '__main__':
