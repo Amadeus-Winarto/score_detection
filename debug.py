@@ -2,13 +2,10 @@
 
 """
 Copyright 2017-2018 Fizyr (https://fizyr.com)
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     http://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,12 +34,10 @@ from ..utils.transform import random_transform_generator
 from ..utils.visualization import draw_annotations, draw_boxes
 from ..utils.anchors import anchors_for_shape, compute_gt_annotations
 from ..utils.config import read_config_file, parse_anchor_parameters
-import matplotlib.pyplot as plt
 
 
 def create_generator(args):
     """ Create the data generators.
-
     Args:
         args: parseargs arguments object.
     """
@@ -166,7 +161,6 @@ def parse_args(args):
 
 def run(generator, args, anchor_params):
     """ Main loop.
-
     Args
         generator: The generator to debug.
         args: parseargs args object.
@@ -201,10 +195,10 @@ def run(generator, args, anchor_params):
                 # draw regressed anchors in green to override most red annotations
                 # result is that annotations without anchors are red, with anchors are green
                 draw_boxes(image, annotations['bboxes'][max_indices[positive_indices], :], (0, 255, 0))
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        plt.imshow(image)
-        #if cv2.waitKey() == ord('q'):
-            #return False
+
+        cv2.imshow('Image', image)
+        if cv2.waitKey() == ord('q'):
+            return False
     return True
 
 
@@ -230,7 +224,7 @@ def main(args=None):
         anchor_params = parse_anchor_parameters(args.config)
 
     # create the display window
-    #cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
+    cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
 
     if args.loop:
         while run(generator, args, anchor_params=anchor_params):
