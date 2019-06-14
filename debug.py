@@ -15,6 +15,7 @@ limitations under the License.
 
 import argparse
 import os
+import matplotlib.pyplot as plt
 import sys
 import cv2
 
@@ -196,7 +197,7 @@ def run(generator, args, anchor_params):
                 # result is that annotations without anchors are red, with anchors are green
                 draw_boxes(image, annotations['bboxes'][max_indices[positive_indices], :], (0, 255, 0))
 
-        cv2.imshow('Image', image)
+        plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
         if cv2.waitKey() == ord('q'):
             return False
     return True
