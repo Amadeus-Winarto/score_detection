@@ -29,7 +29,7 @@ def xml_to_csv(xml_dir, output_file):
     if xml_dir.find('train') != -1:
         mode = 'train'
     elif xml_dir.find('test') != -1:
-        mode = 'set'
+        mode = 'test'
     elif xml_dir.find('valid') != -1:
         mode = 'valid'
     dictionary = _get_classes(xml_dir)
